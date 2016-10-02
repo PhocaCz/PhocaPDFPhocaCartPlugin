@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="phocapdf" method="upgrade" version="3">
+	<name>Phoca PDF - Phoca Cart</name>
+	<creationDate>26/09/2016</creationDate>
+	<author>Jan Pavelka (www.phoca.cz)</author>
+	<authorEmail></authorEmail>
+	<authorUrl>www.phoca.cz</authorUrl>
+	<copyright>Jan Pavelka</copyright>
+	<license>GNU/GPL</license>
+	<version>3.0.0</version>
+
+	
+	<description>PLG_PHOCAPDF_PHOCACART_DESCRIPTION</description>
+
+	
+	<files>
+		<filename plugin="phocacart">phocacart.php</filename>
+		<filename plugin="phocacart">phocacart.xml</filename>
+		<filename plugin="phocacart">index.html</filename>
+	</files>
+
+	
+	<languages>
+		<language tag="en-GB">language/en-GB/en-GB.plg_phocapdf_phocacart.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.plg_phocapdf_phocacart.sys.ini</language>
+	</languages>
+	<administration>
+		<languages>
+			<language tag="en-GB">language/en-GB/en-GB.plg_phocapdf_phocacart.ini</language>
+			<language tag="en-GB">language/en-GB/en-GB.plg_phocapdf_phocacart.sys.ini</language>
+		</languages>
+	</administration>
+	
+	<config>
+	<fields name="params">
+	<fieldset name="phocasite" addpath="/administrator/components/com_phocamaps/models/fields" group="phocasite" label="PLG_PHOCAPDF_PHOCACART_HEADER_SITE_LABEL" >
+		
+		<field name="margin_top" type="phocatextunit" default="27" size="3" label="PLG_PHOCAPDF_PHOCACART_FIELD_MARGIN_TOP_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_MARGIN_TOP_DESC" />
+		<field name="margin_left" type="phocatextunit" default="15" size="3" label="PLG_PHOCAPDF_PHOCACART_FIELD_MARGIN_LEFT_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_MARGIN_LEFT_DESC" />
+		<field name="margin_right" type="phocatextunit" default="15" size="3" label="PLG_PHOCAPDF_PHOCACART_FIELD_MARGIN_RIGHT_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_MARGIN_RIGHT_DESC" />
+  		<field name="margin_bottom" type="phocatextunit" default="25" size="3" label="PLG_PHOCAPDF_PHOCACART_FIELD_MARGIN_BOTTOM_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_MARGIN_BOTTOM_DESC" />
+		
+		<field name="page_format" type="list" default="A4" label="PLG_PHOCAPDF_PHOCACART_FIELD_PAGE_FORMAT_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_PAGE_FORMAT_DESC">
+			<option value="A4">A4</option>
+			<option value="LETTER">LETTER</option>
+		</field>
+		
+		<field name="page_orientation" type="list" default="P" label="PLG_PHOCAPDF_PHOCACART_FIELD_PAGE_ORIENTATION_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_PAGE_ORIENTATION_DESC">
+			<option value="P">PLG_PHOCAPDF_PHOCACART_PORTRAIT</option>
+			<option value="L">PLG_PHOCAPDF_PHOCACART_LANDSCAPE</option>
+		</field>
+		
+		<field name="font_type" type="phocapdffonttype" default=""  label="PLG_PHOCAPDF_PHOCACART_FIELD_FONT_TYPE_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_FONT_TYPE_DESC" />
+		
+		<field name="site_font_color" type="phocacolortext" default="#000000" size="8" label="PLG_PHOCAPDF_PHOCACART_FIELD_SITE_FONT_COLOR_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_SITE_FONT_COLOR_DESC" />
+		<field name="site_cell_height" type="text" default="1.2" size="3" label="PLG_PHOCAPDF_PHOCACART_FIELD_SITE_CELL_HEIGHT_RATIO_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_SITE_CELL_HEIGHT_RATIO_DESC" />
+		
+	</fieldset>
+	
+	
+	<fieldset name="phocaheader" addpath="/administrator/components/com_phocamaps/models/fields" group="phocaheader" label="PLG_PHOCAPDF_PHOCACART_HEADER_HEADER_LABEL" >
+		
+		<field name="header_display" type="list" default="1" label="PLG_PHOCAPDF_PHOCACART_FIELD_DISPLAY_HEADER_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_DISPLAY_HEADER_DESC" >
+			<option value="1">PLG_PHOCAPDF_PHOCACART_YES</option>
+			<option value="0">PLG_PHOCAPDF_PHOCACART_NO</option>
+		</field>
+		
+		<field name="header_display_line" type="list" default="1" label="PLG_PHOCAPDF_PHOCACART_FIELD_Display_Header_Line_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_Display_Header_Line_DESC" >
+			<option value="1">PLG_PHOCAPDF_PHOCACART_YES</option>
+			<option value="0">PLG_PHOCAPDF_PHOCACART_NO</option>
+		</field>
+		
+		<field name="header_data" type="phocapdfeditor" hide="article,pagebreak,readmore,phocagallery,phocadownload" rows="5" cols="40" default="" width="550"  label="PLG_PHOCAPDF_PHOCACART_FIELD_HEADER_DATA_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_HEADER_DATA_DESC" filter="safehtml" />
+		<field name="header_data_align" type="list" default="L"  label="PLG_PHOCAPDF_PHOCACART_FIELD_HEADER_DATA_ALIGN_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_HEADER_DATA_ALIGN_DESC" >
+			<option value="L">PLG_PHOCAPDF_PHOCACART_LEFT</option>
+			<option value="C">PLG_PHOCAPDF_PHOCACART_CENTER</option>
+			<option value="R">PLG_PHOCAPDF_PHOCACART_RIGHT</option>
+			<option value="J">PLG_PHOCAPDF_PHOCACART_JUSTIFY</option>
+		</field>
+		<field name="header_font_type" type="phocapdffonttype" default=""  label="PLG_PHOCAPDF_PHOCACART_FIELD_HEADER_FONT_TYPE_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_HEADER_FONT_TYPE_DESC" />
+		<field name="header_font_size" type="phocatextunit" default="10" size="3" label="PLG_PHOCAPDF_PHOCACART_FIELD_HEADER_FONT_SIZE_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_HEADER_FONT_SIZE_DESC" />
+		<field name="header_font_style" type="list" default="" label="PLG_PHOCAPDF_PHOCACART_FIELD_HEADER_FONT_STYLE_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_HEADER_FONT_STYLE_DESC">
+			<option value="">PLG_PHOCAPDF_PHOCACART_REGULAR</option>
+			<option value="B">PLG_PHOCAPDF_PHOCACART_BOLD</option>
+			<option value="I">PLG_PHOCAPDF_PHOCACART_ITALIC</option>
+			<option value="BI">PLG_PHOCAPDF_PHOCACART_BOLD_ITALIC</option>
+			<option value="U">PLG_PHOCAPDF_PHOCACART_UNDERLINE</option>
+			<option value="D">PLG_PHOCAPDF_PHOCACART_LINE_THROUGH</option>
+		</field>
+		
+		<field name="header_font_color" type="phocacolortext" default="#000000" size="8" label="PLG_PHOCAPDF_PHOCACART_FIELD_HEADER_FONT_COLOR_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_HEADER_FONT_COLOR_DESC" />
+		<field name="header_line_color" type="phocacolortext" default="#000000" size="8" label="PLG_PHOCAPDF_PHOCACART_FIELD_HEADER_LINE_COLOR_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_HEADER_LINE_COLOR_DESC" />
+		<field name="header_bg_color" type="phocacolortext" default="" size="8" label="PLG_PHOCAPDF_PHOCACART_FIELD_HEADER_BACKGROUND_COLOR_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_HEADER_BACKGROUND_COLOR_DESC" />
+
+		<field name="header_cell_height" type="text" default="1.2" size="3" label="PLG_PHOCAPDF_PHOCACART_FIELD_HEADER_CELL_HEIGHT_RATIO_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_HEADER_CELL_HEIGHT_RATIO_DESC" />
+		
+		<field name="header_margin" type="phocatextunit" default="5" size="3" label="PLG_PHOCAPDF_PHOCACART_FIELD_HEADER_MARGIN_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_HEADER_MARGIN_DESC" />
+			
+	</fieldset>
+	
+	<fieldset name="phocafooter" addpath="/administrator/components/com_phocamaps/models/fields" group="phocafooter" label="PLG_PHOCAPDF_PHOCACART_HEADER_FOOTER_LABEL" >
+	
+		<field name="footer_display" type="list" default="1" label="PLG_PHOCAPDF_PHOCACART_FIELD_DISPLAY_FOOTER_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_DISPLAY_FOOTER_DESC" >
+			<option value="1">PLG_PHOCAPDF_PHOCACART_YES</option>
+			<option value="0">PLG_PHOCAPDF_PHOCACART_NO</option>
+		</field>
+		
+		<field name="footer_display_line" type="list" default="1" label="PLG_PHOCAPDF_PHOCACART_FIELD_DISPLAY_FOOTER_LINE_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_DISPLAY_FOOTER_LINE_DESC" >
+			<option value="1">PLG_PHOCAPDF_PHOCACART_YES</option>
+			<option value="0">PLG_PHOCAPDF_PHOCACART_NO</option>
+		</field>
+		
+		<field name="footer_data" type="phocapdfeditor" hide="article,pagebreak,readmore,phocagallery,phocadownload" rows="5" cols="40" default="" width="550"  label="PLG_PHOCAPDF_PHOCACART_FIELD_FOOTER_DATA_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_FOOTER_DATA_DESC" filter="safehtml" />
+		
+		<field name="footer_data_align" type="list" default="R"  label="PLG_PHOCAPDF_PHOCACART_FIELD_FOOTER_DATA_ALIGN_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_FOOTER_DATA_ALIGN_DESC" >
+			<option value="L">PLG_PHOCAPDF_PHOCACART_LEFT</option>
+			<option value="C">PLG_PHOCAPDF_PHOCACART_CENTER</option>
+			<option value="R">PLG_PHOCAPDF_PHOCACART_RIGHT</option>
+			<option value="J">PLG_PHOCAPDF_PHOCACART_JUSTIFY</option>
+		</field>
+		<field name="footer_display_pagination" type="list"  default="1"  label="PLG_PHOCAPDF_PHOCACART_FIELD_FOOTER_DISPLAY_PAGINATION_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_FOOTER_DISPLAY_PAGINATION_DESC" >
+		<option value="1">PLG_PHOCAPDF_PHOCACART_YES</option>
+		<option value="0">PLG_PHOCAPDF_PHOCACART_NO</option>
+		</field>
+		
+		<field name="footer_font_type" type="phocapdffonttype" default=""  label="PLG_PHOCAPDF_PHOCACART_FIELD_FOOTER_FONT_TYPE_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_FOOTER_FONT_TYPE_DESC" />
+		<field name="footer_font_size" type="phocatextunit" default="8" size="3" label="PLG_PHOCAPDF_PHOCACART_FIELD_FOOTER_FONT_SIZE_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_FOOTER_FONT_SIZE_DESC" />
+		<field name="footer_font_style" type="list" default="" label="PLG_PHOCAPDF_PHOCACART_FIELD_FOOTER_FONT_STYLE_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_FOOTER_FONT_STYLE_DESC">
+			<option value="">PLG_PHOCAPDF_PHOCACART_REGULAR</option>
+			<option value="B">PLG_PHOCAPDF_PHOCACART_BOLD</option>
+			<option value="I">PLG_PHOCAPDF_PHOCACART_ITALIC</option>
+			<option value="BI">PLG_PHOCAPDF_PHOCACART_BOLD_ITALIC</option>
+			<option value="U">PLG_PHOCAPDF_PHOCACART_UNDERLINE</option>
+			<option value="D">PLG_PHOCAPDF_PHOCACART_LINE_THROUGH</option>
+		</field>
+		
+		<field name="footer_font_color" type="phocacolortext" default="#000000" size="8" label="PLG_PHOCAPDF_PHOCACART_FIELD_FOOTER_FONT_COLOR_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_FOOTER_FONT_COLOR_DESC" />
+		<field name="footer_line_color" type="phocacolortext" default="#000000" size="8" label="PLG_PHOCAPDF_PHOCACART_FIELD_FOOTER_LINE_COLOR_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_FOOTER_LINE_COLOR_DESC" />
+		
+		<field name="footer_bg_color" type="phocacolortext" default="" size="8" label="PLG_PHOCAPDF_PHOCACART_FIELD_FOOTER_BACKGROUND_COLOR_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_FOOTER_BACKGROUND_COLOR_DESC" />
+		
+		<field name="footer_cell_height" type="text" default="1.2" size="3" label="PLG_PHOCAPDF_PHOCACART_FIELD_FOOTER_CELL_HEIGHT_RATIO_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_FOOTER_CELL_HEIGHT_RATIO_DESC" />
+		
+		<field name="footer_margin" type="phocatextunit" default="15" size="3" label="PLG_PHOCAPDF_PHOCACART_FIELD_FOOTER_MARGIN_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_FOOTER_MARGIN_DESC" />
+			
+	</fieldset>
+	
+	
+	<fieldset name="phocapdf" addpath="/administrator/components/com_phocamaps/models/fields" group="phocapdf" label="PLG_PHOCAPDF_PHOCACART_HEADER_PDF_LABEL" >
+		
+		<field name="pdf_name" type="text" default="" size="30" label="PLG_PHOCAPDF_PHOCACART_FIELD_PDF_NAME_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_PDF_NAME_DESC" />
+		<field name="pdf_destination" type="list" default="S" label="PLG_PHOCAPDF_PHOCACART_FIELD_PDF_DESTINATION_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_PDF_DESTINATION_DESC">
+
+			<option value="I">PLG_PHOCAPDF_PHOCACART_INLINE_BROWSER</option>
+			<option value="D">PLG_PHOCAPDF_PHOCACART_FORCE_FILE_DOWNLOAD</option>
+			<option value="S">PLG_PHOCAPDF_PHOCACART_INLINE_BROWSER_POPUP</option>
+		</field>
+		
+		<field name="use_cache" type="list" default="0" label="PLG_PHOCAPDF_PHOCACART_FIELD_CACHE_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_CACHE_DESC">
+			<option value="1">PLG_PHOCAPDF_PHOCACART_YES</option>
+			<option value="0">PLG_PHOCAPDF_PHOCACART_NO</option>
+		</field>
+		
+		<!--
+		<field name="image_scale" type="text" default="1" size="3" label="PLG_PHOCAPDF_PHOCACART_FIELD_IMAGE_SCALE_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_IMAGE_SCALE_DESC" />
+		
+		<field name="display_plugin" type="list" default="0" label="PLG_PHOCAPDF_PHOCACART_FIELD_DISPLAY_PLUGIN_CODE_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_DISPLAY_PLUGIN_CODE_DESC" >
+			<option value="1">PLG_PHOCAPDF_PHOCACART_YES</option>
+			<option value="0">PLG_PHOCAPDF_PHOCACART_NO</option>
+		</field>
+		
+		<field name="display_image" type="list" default="1" label="PLG_PHOCAPDF_PHOCACART_FIELD_DISPLAY_IMAGES_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_DISPLAY_IMAGES_DESC" >
+			<option value="1">PLG_PHOCAPDF_PHOCACART_YES</option>
+			<option value="0">PLG_PHOCAPDF_PHOCACART_NO</option>
+		</field>
+		-->
+		
+			
+	</fieldset>
+	</fields>
+</config>
+</extension>
