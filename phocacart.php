@@ -137,7 +137,7 @@ class plgPhocaPDFPhocaCart extends JPlugin
 	
 		$pdf->setFooterFont(array($content->footer_font_type, $content->footer_font_style, $content->footer_font_size));
 		// Initialize PDF Document
-		$pdf->AliasNbPages();
+		//$pdf->AliasNbPages();
 		$pdf->AddPage();
 		
 		if (isset($staticData['output']) && $staticData['output'] != '') {
@@ -145,8 +145,7 @@ class plgPhocaPDFPhocaCart extends JPlugin
 		} else {
 			$documentOutputArray 	= $document->getBuffer();
 		}
-		
-		//krumo($documentOutputArray);exit;
+	
 
 		$documentOutput			= '';
 		
@@ -157,20 +156,58 @@ class plgPhocaPDFPhocaCart extends JPlugin
 		} else {
 			$documentOutput	.= (string)$documentOutputArray;
 		}
+		
+		// Replace PDF variables
+		// QR CODE
 	
+		$regex_one		= '/({phocapdfqrcode\s*)(.*?)(})/si';
+		$regex_all		= '/{phocapdfqrcode\s*.*?}/si';
+		$matches 		= array();
+		$count_matches	= preg_match_all($regex_all,$documentOutput,$matches,PREG_OFFSET_CAPTURE | PREG_PATTERN_ORDER);
+		
+		if ($count_matches != 0) {
+			for($i = 0; $i < $count_matches; $i++) {
+				$pcPart	= $matches[0][$i][0];
+				preg_match($regex_one,$pcPart,$pcParts);
+				$parts			= explode("|", $pcParts[2]);
+				if (isset($parts[1]) && $parts[1] != '') {
+					
+					$text = urldecode($parts[1]);
+					
+					$style = array(
+						'border' => true,
+						'padding' => 3,
+						'fgcolor' => array(0,0,0),
+						'bgcolor' => false
+					);
+					
+			
+
+					
+					$params = $pdf->serializeTCPDFtagParameters(array($text, 'QRCODE,H', '', '', 35, 35, $style, 'N'));
+
+					$output = '<tcpdf method="write2DBarcode" params="'.$params.'" />';
+					
+				}
+				
+				$documentOutput = preg_replace($regex_all, $output, $documentOutput, 1);
+			}
+		}
+		
 		/*if ($content->display_image == 0) {
 			$documentOutput 	= preg_replace_callback('/<img(.*)>/Ui', array('phocaPDFREstaurantCallbackImage', 'phocaPDFCallbackImage'), $documentOutput);
 		}*/
 		
-		
 			
 		// The space must be copied directly from editor and the file must be saved as ANSI
-		//$documentOutput = str_replace(utf8_encode("<p> </p>"), '<p></p>', $documentOutput);
+		//$documentOutput = str_replace(utf8_encode("<p>ï¿½</p>"), '<p></p>', $documentOutput);
 		$documentOutput = str_replace(array(utf8_encode(chr(11)), utf8_encode(chr(160))), ' ', $documentOutput);	
 		
 		
 		// Build the PDF Document string from the document buffer
 		$pdf->writeHTML($documentOutput , true);
+		
+		
 		
 		return true;
 	}
@@ -192,12 +229,16 @@ class plgPhocaPDFPhocaCart extends JPlugin
 if (JFile::exists(JPATH_ADMINISTRATOR.'/components/com_phocapdf/helpers/phocapdf.php')) {
 	require_once(JPATH_ADMINISTRATOR.'/components/com_phocapdf/helpers/phocapdf.php');
 } else {
-	return JError::raiseError('PDF ERROR', 'Document cannot be created - Loading of Phoca PDF library (Phoca PDF) failed');
+	
+	throw new Exception('PDF ERROR: Document cannot be created - Loading of Phoca PDF library (Phoca PDF) failed', 500);
+	return false;
 }
 if (JFile::exists(JPATH_ADMINISTRATOR.'/components/com_phocapdf/assets/tcpdf/tcpdf.php')) {
 	require_once(JPATH_ADMINISTRATOR.'/components/com_phocapdf/assets/tcpdf/tcpdf.php');
 } else {
-	return JError::raiseError('PDF ERROR', 'Document cannot be created - Loading of Phoca PDF library (TCPDF) failed');
+	
+	throw new Exception('PDF ERROR: Document cannot be created - Loading of Phoca PDF library (TCPDF) failed', 500);
+	return false;
 }
 
 class PhocaPDFPhocaCartTCPDF extends TCPDF
@@ -221,15 +262,16 @@ class PhocaPDFPhocaCartTCPDF extends TCPDF
 		$headerdata = $this->getHeaderData();
 		
 		// The space must be copied directly from editor and the file must be saved as ANSI
-		//$headerdata = str_replace(utf8_encode("<p> </p>"), '<p></p>', $headerdata);
+		//$headerdata = str_replace(utf8_encode("<p>ï¿½</p>"), '<p></p>', $headerdata);
 		$headerdata = str_replace(array(utf8_encode(chr(11)), utf8_encode(chr(160))), ' ', $headerdata);
 	
 		// Params
+		$spotColors 					= $this->getAllSpotColors();
 		$params							= array();
 		$params['header_display_line']	= $pluginP->get('header_display_line', 1);
 		$params['header_display']		= $pluginP->get('header_display', 1);
-		$params['header_font_color']	= $this->convertHTMLColorToDec($pluginP->get('header_font_color', '#000000'));
-		$params['header_line_color']	= $this->convertHTMLColorToDec($pluginP->get('header_line_color', '#000000'));
+		$params['header_font_color']	= TCPDF_COLORS::convertHTMLColorToDec($pluginP->get('header_font_color', '#000000'), $spotColors);
+		$params['header_line_color']	= TCPDF_COLORS::convertHTMLColorToDec($pluginP->get('header_line_color', '#000000'), $spotColors);
 		$params['header_bg_color']		= $pluginP->get('header_bg_color', '');
 		$params['header_data']			= $pluginP->get('header_data', '');
 		$params['header_data_align']	= $pluginP->get('header_data_align', 'L');
@@ -306,11 +348,12 @@ class PhocaPDFPhocaCartTCPDF extends TCPDF
 		$footerfont = $this->getFooterFont();
 
 		$pluginP	= $this->getPluginParameters();
+		$spotColors = $this->getAllSpotColors();
 		// Params
 		$params								= array();
 		$params['footer_display_line']		= $pluginP->get('footer_display_line', 1);
-		$params['footer_font_color']		= $this->convertHTMLColorToDec($pluginP->get('footer_font_color', '#000000'));
-		$params['footer_line_color']		= $this->convertHTMLColorToDec($pluginP->get('footer_line_color', '#000000'));
+		$params['footer_font_color']		= TCPDF_COLORS::convertHTMLColorToDec($pluginP->get('footer_font_color', '#000000'), $spotColors);
+		$params['footer_line_color']		= TCPDF_COLORS::convertHTMLColorToDec($pluginP->get('footer_line_color', '#000000'), $spotColors);
 		$params['footer_bg_color']			= $pluginP->get('footer_bg_color', '');
 		$params['footer_display']			= $pluginP->get('footer_display', 1);
 		$params['footer_data']				= $pluginP->get('footer_data', '');
@@ -336,7 +379,7 @@ class PhocaPDFPhocaCartTCPDF extends TCPDF
 			
 			
 			// The space must be copied directly from editor and the file must be saved as ANSI
-			//$params['footer_data'] = str_replace(utf8_encode("<p> </p>"), '<p></p>', $params['footer_data']);
+			//$params['footer_data'] = str_replace(utf8_encode("<p>ï¿½</p>"), '<p></p>', $params['footer_data']);
 			$params['footer_data'] = str_replace(array(utf8_encode(chr(11)), utf8_encode(chr(160))), ' ', $params['footer_data']);
 			$isHTML = true;
 		}
@@ -391,7 +434,7 @@ class PhocaPDFPhocaCartTCPDF extends TCPDF
 		
 			$fill = 0;
 			if ($params['footer_bg_color'] != '') {
-				$fillColor = $this->convertHTMLColorToDec($params['footer_bg_color']);
+				$fillColor = TCPDF_COLORS::convertHTMLColorToDec($params['footer_bg_color'], $spotColors);
 				$this->SetFillColorArray(array($fillColor['R'],$fillColor['G'],$fillColor['B']));
 				$fill = 1;
 				

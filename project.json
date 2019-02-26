@@ -1,0 +1,18 @@
+{
+	"author": "Jan Pavelka (www.phoca.cz)",
+	"authorUrl": "https://www.phoca.cz",
+	"copyright": "Jan Pavelka",
+	"license": "GNU/GPL",
+	"projectName": "PhocaPDFPhocaCartPlugin",
+	"extensionName": "Phoca PDF PhocaCart Plugin",
+	"projectInitials" : "PDF",				  
+	"description": "Phoca PDF PhocaCart plugin is Joomla! plugin which enables option to render PDF invoices, delivery notes, receipts in Phoca Cart component.",
+	"projectUrl": "https://www.phoca.cz/phocapdf-plugins",
+	"projectDocumentationUrl": "https://www.phoca.cz/documents/48-phoca-pdf-plugins/901-phoca-pdf-phocacart-plugin",
+	"projectMainComponent": "Phoca PDF",
+	"projectMainComponentInfoUrl": "https://www.phoca.cz/project/phocapdf-joomla-pdf",
+	"projectDemo" : {
+		"Joomla! 3 Demo": "https://www.phoca.cz/phocacartdemo"
+	},
+	"projectColor": "#D50000"
+}
