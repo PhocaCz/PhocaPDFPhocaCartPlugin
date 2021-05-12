@@ -2,7 +2,7 @@
 
 
 
-![Phoca PDF PhocaCart Plugin](https://github.com/PhocaCz/PhocaPDFPhocaCartPlugin/blob/master/phocacart.png)
+![Phoca PDF PhocaCart Plugin](https://github.com/PhocaCz/PhocaPDFPhocaCartPlugin/blob/master/phocacart.png?raw=true)
 
 # Phoca PDF PhocaCart Plugin
 
@@ -52,9 +52,13 @@ Phoca PDF PhocaCart plugin is Joomla! plugin which enables option to render PDF 
 
 
 
+
+
+
+
 ## Version
 
-3.0.10
+3.0.12
 
 
 

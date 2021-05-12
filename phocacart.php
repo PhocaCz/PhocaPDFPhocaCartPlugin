@@ -105,6 +105,7 @@ class plgPhocaPDFPhocaCart extends JPlugin
 		}
 
 
+
 		// - - - - - - - - - - - - - - - -
 		// HEADER
 		if ($content->header_data != '') {
@@ -307,9 +308,12 @@ class PhocaPDFPhocaCartTCPDF extends TCPDF
 		$headerfont = $this->getHeaderFont();
 		$headerdata = $this->getHeaderData();
 
+
+
+
 		// The space must be copied directly from editor and the file must be saved as ANSI
 		//$headerdata = str_replace(utf8_encode("<p>�</p>"), '<p></p>', $headerdata);
-		$headerdata = str_replace(array(utf8_encode(chr(11)), utf8_encode(chr(160))), ' ', $headerdata);
+		$headerdata['string'] = str_replace(array(utf8_encode(chr(11)), utf8_encode(chr(160))), ' ', $headerdata['string']);
 
 		// Params
 		$spotColors 					= $this->getAllSpotColors();
@@ -337,12 +341,17 @@ class PhocaPDFPhocaCartTCPDF extends TCPDF
 		}
 
 		if ($params['header_display'] == 1) {
+
 			if (($headerdata['logo']) AND ($headerdata['logo'] != K_BLANK_IMAGE)) {
+
 				$this->Image(K_PATH_IMAGES.$headerdata['logo'], $this->GetX(), $this->getHeaderMargin(), $headerdata['logo_width']);
+
 				$imgy = $this->getImageRBY();
+
 			} else {
 				$imgy = $this->GetY();
 			}
+
 			$cell_height = round(($this->getCellHeightRatio() * $headerfont[2]) / $this->getScaleFactor(), 2);
 			// set starting margin for text data cell
 			if ($this->getRTL()) {
