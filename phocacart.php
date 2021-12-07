@@ -251,6 +251,8 @@ class plgPhocaPDFPhocaCart extends JPlugin
 		$documentOutput = str_replace(array(utf8_encode(chr(11)), utf8_encode(chr(160))), ' ', $documentOutput);
 
 
+    //    krumo($documentOutput);exit;
+
 		// Build the PDF Document string from the document buffer
 		$pdf->writeHTML($documentOutput , true);
 
