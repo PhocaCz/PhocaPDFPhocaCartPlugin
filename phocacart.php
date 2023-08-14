@@ -248,10 +248,10 @@ class plgPhocaPDFPhocaCart extends JPlugin
 
 		// The space must be copied directly from editor and the file must be saved as ANSI
 		//$documentOutput = str_replace(utf8_encode("<p>�</p>"), '<p></p>', $documentOutput);
-		$documentOutput = str_replace(array(utf8_encode(chr(11)), utf8_encode(chr(160))), ' ', $documentOutput);
-
-
-    //    krumo($documentOutput);exit;
+		//$documentOutput = str_replace(array(utf8_encode(chr(11)), utf8_encode(chr(160))), ' ', $documentOutput);
+		if (function_exists('mb_convert_encoding')) {
+			$documentOutput = str_replace(array(mb_convert_encoding(chr(11), 'UTF-8', 'ISO-8859-1'), mb_convert_encoding(chr(160), 'UTF-8', 'ISO-8859-1')), ' ', $documentOutput);
+		}
 
 		// Build the PDF Document string from the document buffer
 		$pdf->writeHTML($documentOutput , true);
@@ -315,7 +315,10 @@ class PhocaPDFPhocaCartTCPDF extends TCPDF
 
 		// The space must be copied directly from editor and the file must be saved as ANSI
 		//$headerdata = str_replace(utf8_encode("<p>�</p>"), '<p></p>', $headerdata);
-		$headerdata['string'] = str_replace(array(utf8_encode(chr(11)), utf8_encode(chr(160))), ' ', $headerdata['string']);
+		//$headerdata['string'] = str_replace(array(utf8_encode(chr(11)), utf8_encode(chr(160))), ' ', $headerdata['string']);
+		if (function_exists('mb_convert_encoding')) {
+			$headerdata['string'] = str_replace(array(mb_convert_encoding(chr(11), 'UTF-8', 'ISO-8859-1'), mb_convert_encoding(chr(160), 'UTF-8', 'ISO-8859-1')), ' ', $headerdata['string']);
+		}
 
 		// Params
 		$spotColors 					= $this->getAllSpotColors();
@@ -438,6 +441,9 @@ class PhocaPDFPhocaCartTCPDF extends TCPDF
 			// The space must be copied directly from editor and the file must be saved as ANSI
 			//$params['footer_data'] = str_replace(utf8_encode("<p>�</p>"), '<p></p>', $params['footer_data']);
 			$params['footer_data'] = str_replace(array(utf8_encode(chr(11)), utf8_encode(chr(160))), ' ', $params['footer_data']);
+			if (function_exists('mb_convert_encoding')) {
+				$params['footer_data'] = str_replace(array(mb_convert_encoding(chr(11), 'UTF-8', 'ISO-8859-1'), mb_convert_encoding(chr(160), 'UTF-8', 'ISO-8859-1')), ' ', $params['footer_data']);
+			}
 			$isHTML = true;
 		}
 

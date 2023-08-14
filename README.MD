@@ -58,7 +58,7 @@ Phoca PDF PhocaCart plugin is Joomla! plugin which enables option to render PDF 
 
 ## Version (Joomla! 4.x)
 
-4.0.0
+4.0.1
 
 
 

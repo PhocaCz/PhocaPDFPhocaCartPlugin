@@ -2,12 +2,12 @@
 <extension type="plugin" group="phocapdf" method="upgrade" version="4.0">
 	<name>plg_phocapdf_phocacart</name>
 	<author>Jan Pavelka (www.phoca.cz)</author>
-	<creationDate>07/12/2021</creationDate>
+	<creationDate>14/08/2023</creationDate>
 	<authorEmail></authorEmail>
 	<authorUrl>https://www.phoca.cz</authorUrl>
 	<copyright>Jan Pavelka</copyright>
 	<license>GNU/GPL</license>
-	<version>4.0.0</version>
+	<version>4.0.1</version>
 	<description>PLG_PHOCAPDF_PHOCACART_DESCRIPTION</description>
 	<projectName>PhocaPDFPhocaCartPlugin</projectName>
 
@@ -31,7 +31,7 @@
 	
 	<config>
 	<fields name="params">
-	<fieldset name="phocasite" addpath="/administrator/components/com_phocamaps/models/fields" group="phocasite" label="PLG_PHOCAPDF_PHOCACART_HEADER_SITE_LABEL">
+	<fieldset name="phocasite" addpath="/administrator/components/com_phocapdf/models/fields" group="phocasite" label="PLG_PHOCAPDF_PHOCACART_HEADER_SITE_LABEL">
 		
 		<field name="margin_top" type="phocatextunit" default="27" size="3" label="PLG_PHOCAPDF_PHOCACART_FIELD_MARGIN_TOP_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_MARGIN_TOP_DESC"/>
 		<field name="margin_left" type="phocatextunit" default="15" size="3" label="PLG_PHOCAPDF_PHOCACART_FIELD_MARGIN_LEFT_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_MARGIN_LEFT_DESC"/>
@@ -56,7 +56,7 @@
 	</fieldset>
 	
 	
-	<fieldset name="phocaheader" addpath="/administrator/components/com_phocamaps/models/fields" group="phocaheader" label="PLG_PHOCAPDF_PHOCACART_HEADER_HEADER_LABEL">
+	<fieldset name="phocaheader" addpath="/administrator/components/com_phocapdf/models/fields" group="phocaheader" label="PLG_PHOCAPDF_PHOCACART_HEADER_HEADER_LABEL">
 		
 		<field name="header_display" type="list" default="1" label="PLG_PHOCAPDF_PHOCACART_FIELD_DISPLAY_HEADER_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_DISPLAY_HEADER_DESC">
 			<option value="1">PLG_PHOCAPDF_PHOCACART_YES</option>
@@ -96,7 +96,7 @@
 			
 	</fieldset>
 	
-	<fieldset name="phocafooter" addpath="/administrator/components/com_phocamaps/models/fields" group="phocafooter" label="PLG_PHOCAPDF_PHOCACART_HEADER_FOOTER_LABEL">
+	<fieldset name="phocafooter" addpath="/administrator/components/com_phocapdf/models/fields" group="phocafooter" label="PLG_PHOCAPDF_PHOCACART_HEADER_FOOTER_LABEL">
 	
 		<field name="footer_display" type="list" default="1" label="PLG_PHOCAPDF_PHOCACART_FIELD_DISPLAY_FOOTER_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_DISPLAY_FOOTER_DESC">
 			<option value="1">PLG_PHOCAPDF_PHOCACART_YES</option>
@@ -144,7 +144,7 @@
 	</fieldset>
 	
 	
-	<fieldset name="phocapdf" addpath="/administrator/components/com_phocamaps/models/fields" group="phocapdf" label="PLG_PHOCAPDF_PHOCACART_HEADER_PDF_LABEL">
+	<fieldset name="phocapdf" addpath="/administrator/components/com_phocapdf/models/fields" group="phocapdf" label="PLG_PHOCAPDF_PHOCACART_HEADER_PDF_LABEL">
 		
 		<field name="pdf_name" type="text" default="" size="30" label="PLG_PHOCAPDF_PHOCACART_FIELD_PDF_NAME_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_PDF_NAME_DESC"/>
 		<field name="pdf_destination" type="list" default="S" label="PLG_PHOCAPDF_PHOCACART_FIELD_PDF_DESTINATION_LABEL" description="PLG_PHOCAPDF_PHOCACART_FIELD_PDF_DESTINATION_DESC">

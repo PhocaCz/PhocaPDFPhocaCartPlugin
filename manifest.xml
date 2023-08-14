@@ -1,3 +1,4 @@
+<?xml version="1.0" ?>
 <updates>
 	<update>
 		<name><![CDATA[ Phoca PDF PhocaCart Plugin ]]></name>
@@ -25,18 +26,19 @@
 		<element>phocacart</element>
 		<folder>phocapdf</folder>
 		<type>plugin</type>
-		<version>4.0.0</version>
-		<infourl title="Phoca PDF PhocaCart Plugin 4.0.0">https://www.phoca.cz/</infourl>
+		<version>4.0.1</version>
+		<infourl title="Phoca PDF PhocaCart Plugin 4.0.1">https://www.phoca.cz/</infourl>
 		<downloads>
-			<downloadurl type="full" format="zip">https://github.com/PhocaCz/PhocaPDFPhocaCartPlugin/releases/download/4.0.0/plg_phocapdf_phocacart_v4.0.0.zip</downloadurl>
+			<downloadurl type="full" format="zip">https://github.com/PhocaCz/PhocaPDFPhocaCartPlugin/releases/download/4.0.1/plg_phocapdf_phocacart_v4.0.1.zip</downloadurl>
 		</downloads>
+		<sha512>dd5cc3e0b7c3bfce8d7c72c4aba3ebe58425808420b051b1f989e379ae7054e7bb9c97cfb13d4096f0eb0d23451e65972123c0e41b137f78d710af0238f83d76</sha512>
 		<tags>
 			<tag>stable</tag>
 		</tags>
 		<maintainer><![CDATA[ Phoca.cz ]]></maintainer>
 		<maintainerurl>https://www.phoca.cz/</maintainerurl>
 		<section>Updates</section>
-		<targetplatform name="joomla" version="4.[0]"/>
+		<targetplatform name="joomla" version="4\.*"/>
 		<client>site</client>
 	</update>
 </updates>
