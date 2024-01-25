@@ -31,7 +31,6 @@
 		<downloads>
 			<downloadurl type="full" format="zip">https://github.com/PhocaCz/PhocaPDFPhocaCartPlugin/releases/download/4.0.1/plg_phocapdf_phocacart_v4.0.1.zip</downloadurl>
 		</downloads>
-		<sha512>dd5cc3e0b7c3bfce8d7c72c4aba3ebe58425808420b051b1f989e379ae7054e7bb9c97cfb13d4096f0eb0d23451e65972123c0e41b137f78d710af0238f83d76</sha512>
 		<tags>
 			<tag>stable</tag>
 		</tags>
@@ -39,6 +38,27 @@
 		<maintainerurl>https://www.phoca.cz/</maintainerurl>
 		<section>Updates</section>
 		<targetplatform name="joomla" version="4\.*"/>
+		<client>site</client>
+	</update>
+	<update>
+		<name><![CDATA[ Phoca PDF PhocaCart Plugin ]]></name>
+		<description><![CDATA[ Phoca PDF PhocaCart plugin is Joomla! plugin which enables option to render PDF invoices, delivery notes, receipts in Phoca Cart component. ]]></description>
+		<element>phocacart</element>
+		<folder>phocapdf</folder>
+		<type>plugin</type>
+		<version>5.0.1</version>
+		<infourl title="Phoca PDF PhocaCart Plugin 5.0.1">https://www.phoca.cz/</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">https://github.com/PhocaCz/PhocaPDFPhocaCartPlugin/releases/download/5.0.1/plg_phocapdf_phocacart_v5.0.1.zip</downloadurl>
+		</downloads>
+		<sha512>5d36b0d3b9c8cb3a61df374fe84797a50bb45df1ffb14ff6ab62d8abc9045478f715e9165d13133c55689c5aa670ea46d3610ac01d3b0a41aa00fc7b63c03910</sha512>
+		<tags>
+			<tag>stable</tag>
+		</tags>
+		<maintainer><![CDATA[ Phoca.cz ]]></maintainer>
+		<maintainerurl>https://www.phoca.cz/</maintainerurl>
+		<section>Updates</section>
+		<targetplatform name="joomla" version="(4|5)\.*"/>
 		<client>site</client>
 	</update>
 </updates>

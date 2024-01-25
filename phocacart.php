@@ -9,11 +9,17 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU General Public License version 2 or later;
  */
 
+use Joomla\CMS\Filesystem\File;
+use Joomla\CMS\Plugin\CMSPlugin;
+use Joomla\CMS\Plugin\PluginHelper;
+use Joomla\Registry\Registry;
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die('Restricted access');
 jimport( 'joomla.plugin.plugin' );
 jimport( 'joomla.filesystem.file' );
 jimport( 'joomla.html.parameter' );
-class plgPhocaPDFPhocaCart extends JPlugin
+class plgPhocaPDFPhocaCart extends CMSPlugin
 {
 	function __construct(& $subject, $config) {
 		parent :: __construct($subject, $config);
@@ -22,8 +28,8 @@ class plgPhocaPDFPhocaCart extends JPlugin
 	function onBeforeCreatePDFPhocaCart(&$content, $staticData = array()) {
 
 		$content->content 	= '';
-		$pluginPDFP			= JPluginHelper::getPlugin('phocapdf', 'phocacart');
-		$pluginP 			= new JRegistry;
+		$pluginPDFP			= PluginHelper::getPlugin('phocapdf', 'phocacart');
+		$pluginP 			= new Registry;
 		$pluginP->loadString($pluginPDFP->params);
 
 
@@ -123,7 +129,7 @@ class plgPhocaPDFPhocaCart extends JPlugin
 
 
 
-		$lang = JFactory::getLanguage();
+		$lang = Factory::getLanguage();
 		$font = $content->font_type;
 		$pdf->setRTL($lang->isRTL());
 
@@ -275,14 +281,14 @@ class plgPhocaPDFPhocaCart extends JPlugin
  * Phoca PDF - extended TCPDF Class
  */
 
-if (JFile::exists(JPATH_ADMINISTRATOR.'/components/com_phocapdf/helpers/phocapdf.php')) {
+if (File::exists(JPATH_ADMINISTRATOR.'/components/com_phocapdf/helpers/phocapdf.php')) {
 	require_once(JPATH_ADMINISTRATOR.'/components/com_phocapdf/helpers/phocapdf.php');
 } else {
 
 	throw new Exception('PDF ERROR: Document cannot be created - Loading of Phoca PDF library (Phoca PDF) failed', 500);
 	return false;
 }
-if (JFile::exists(JPATH_ADMINISTRATOR.'/components/com_phocapdf/assets/tcpdf/tcpdf.php')) {
+if (File::exists(JPATH_ADMINISTRATOR.'/components/com_phocapdf/assets/tcpdf/tcpdf.php')) {
 	require_once(JPATH_ADMINISTRATOR.'/components/com_phocapdf/assets/tcpdf/tcpdf.php');
 } else {
 
@@ -296,8 +302,8 @@ class PhocaPDFPhocaCartTCPDF extends TCPDF
 
 	private function getPluginParameters() {
 		if (empty($this->pluginP)) {
-			$pluginPDFP	= JPluginHelper::getPlugin('phocapdf', 'phocacart');
-			$this->pluginP	= new JRegistry;
+			$pluginPDFP	= PluginHelper::getPlugin('phocapdf', 'phocacart');
+			$this->pluginP	= new Registry;
 			$this->pluginP->loadString($pluginPDFP->params);
 		}
 		return $this->pluginP;
@@ -440,7 +446,7 @@ class PhocaPDFPhocaCartTCPDF extends TCPDF
 
 			// The space must be copied directly from editor and the file must be saved as ANSI
 			//$params['footer_data'] = str_replace(utf8_encode("<p>�</p>"), '<p></p>', $params['footer_data']);
-			$params['footer_data'] = str_replace(array(utf8_encode(chr(11)), utf8_encode(chr(160))), ' ', $params['footer_data']);
+			//$params['footer_data'] = str_replace(array(utf8_encode(chr(11)), utf8_encode(chr(160))), ' ', $params['footer_data']);
 			if (function_exists('mb_convert_encoding')) {
 				$params['footer_data'] = str_replace(array(mb_convert_encoding(chr(11), 'UTF-8', 'ISO-8859-1'), mb_convert_encoding(chr(160), 'UTF-8', 'ISO-8859-1')), ' ', $params['footer_data']);
 			}
